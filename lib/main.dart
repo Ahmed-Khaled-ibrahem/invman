@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:invman/presentation/layout/home_screen.dart';
+import 'package:invman/presentation/theme/theme.dart';
 
 
 void main() {
@@ -14,13 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Freelancer',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        elevatedButtonTheme: const ElevatedButtonThemeData(
-          style: ButtonStyle(
-          )
-        )
-      ),
+      theme: lightTheme,
       home:  const HomeScreen(),
     );
   }
