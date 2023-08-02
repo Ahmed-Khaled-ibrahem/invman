@@ -2,26 +2,28 @@
 class Item {
   String id;
   String name;
-  String nickName;
-  String description;
-  double costPrice;
-  String markedPrice;
-  double totalStock = 0.0;
-  String lastStockEntry;
-  int used = 0;
-  Map units;
+  String? description;
+  double cost;
+  double price;
+  double totalStock;
+  String? unit;
+  String category;
+  String? brand;
+  String? imageUrl;
+  String? barcode;
 
   Item({
     required this.id,
     required this.name,
-    required this.nickName,
-    required this.description,
-    required this.costPrice,
-    required this.markedPrice,
-    required this.totalStock,
-    required this.lastStockEntry,
-    required this.used,
-    required this.units,
+    this.description,
+    required this.cost,
+    required this.price,
+    this.totalStock = 0,
+    this.unit,
+    this.category = "general",
+    this.brand,
+    this.imageUrl,
+    this.barcode,
   });
 
   void increaseStock(double addedStock) {
@@ -35,14 +37,14 @@ class Item {
   List<double> getNewCostPriceAndStock(
       double totalCostPriceOfTransaction, double noOfItemsInTransaction) {
 
-    if (costPrice == null) {
+    if (cost == null) {
       return [
         totalCostPriceOfTransaction / noOfItemsInTransaction,
         noOfItemsInTransaction
       ];
     }
 
-    double currentCp = costPrice;
+    double currentCp = cost;
     double totalCurrentCpOfStocks = currentCp * totalStock;
     double totalCp = totalCurrentCpOfStocks + totalCostPriceOfTransaction;
     double totalItems = totalStock + noOfItemsInTransaction;
@@ -50,29 +52,6 @@ class Item {
     return [newCp, totalItems];
   }
 
-  void modifyLatestStockEntry(transaction, double newNoOfItemsInTransaction,
-      double newTotalCostPriceOfTransaction) {
-
-    assert(transaction.type == 1);
-    // Retrieve old cp and totalStock before faulty transaction
-    double oldTransactionItems = transaction.items;
-    double oldTransactionCostPrice = transaction.amount / oldTransactionItems;
-    print(
-        "Got old transaction cp $oldTransactionCostPrice and items $oldTransactionItems");
-    double oldTotalStock = totalStock - oldTransactionItems;
-    double oldTotalCostPrice = ((costPrice * totalStock) -
-        (oldTransactionItems * oldTransactionCostPrice))
-        .abs();
-
-    print(
-        "Got total costprice of old $oldTotalCostPrice & items $oldTotalStock");
-    // Reapply to get new cp from new updated transaction info
-    double totalCp = oldTotalCostPrice + newTotalCostPriceOfTransaction;
-    double totalItems = oldTotalStock + newNoOfItemsInTransaction;
-    double newCp = totalCp / totalItems;
-    costPrice = newCp;
-    totalStock = totalItems;
-  }
 
   // static List<Item> fromQuerySnapshot(QuerySnapshot snapshot) {
   //   List<Item> items = List<Item>();
@@ -92,27 +71,29 @@ class Item {
 
     map['id'] = id;
     map['name'] = name;
-    map['nick_name'] = nickName;
     map['description'] = description;
-    map['cost_price'] = costPrice;
-    map['marked_price'] = markedPrice;
+    map['cost'] = cost;
+    map['price'] = price;
     map['total_stock'] = totalStock;
-    map['last_stock_entry'] = lastStockEntry;
-    map['used'] = used;
-    map['units'] = units;
+    map['unit'] = unit;
+    map['category'] = category;
+    map['brand'] = brand;
+    map['imageUrl'] = imageUrl;
+    map['barcode'] = barcode;
     return map;
   }
 
   Item.fromMapObject(Map<String, dynamic> map) :
-    id = map['id'],
-    description = map['description'],
-    name = map['name'],
-    nickName = map['nick_name'],
-    costPrice = map['cost_price'],
-    markedPrice = map['marked_price'],
-    totalStock = map['total_stock'],
-    lastStockEntry = map['last_stock_entry'],
-    used = map['used'],
-    units = map['units'];
+        id = map['id'],
+        description = map['description'],
+        name = map['name'],
+        cost = map['cost'],
+        price = map['price'],
+        totalStock = map['total_stock'],
+        unit = map['unit'],
+        category = map['category'],
+        imageUrl = map['imageUrl'],
+        barcode = map['barcode'],
+        brand = map['brand'];
 
 }

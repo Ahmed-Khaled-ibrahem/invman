@@ -1,32 +1,22 @@
 
+import 'item.dart';
+
 class ItemTransaction {
   String id;
   int type;
-  double amount;
-  double costPrice;
-  double dueAmount;
-  String itemId;
-  double items;
-  String date;
-  String description;
-  int createdAt;
-  String signature;
+  String createdBy;
+  List<Item> items;
+  late DateTime createdAt;
+
 
   ItemTransaction(
   {
     required this.id,
     required this.type,
-    required this.amount,
-    required this.itemId,
-    required this.costPrice,
+    required this.createdBy,
     required this.items,
-    required this.date,
-    required this.description,
-    required this.dueAmount,
-    required this.createdAt,
-    required this.signature
   }
-  );
+  ){createdAt = DateTime.now();}
 
 
   // static List<ItemTransaction> fromQuerySnapshot(QuerySnapshot snapshot) {
@@ -44,32 +34,18 @@ class ItemTransaction {
 
   Map<String, dynamic> toMap() {
     var map = <String, dynamic>{};
-
     map['id'] = id;
-    map['item_id'] = itemId;
     map['type'] = type;
-    map['description'] = description;
-    map['due_amount'] = dueAmount;
-    map['date'] = date;
-    map['amount'] = amount;
     map['items'] = items;
-    map['cost_price'] = costPrice;
-    map['created_at'] = createdAt;
-    map['signature'] = signature;
+    map['createdBy'] = createdBy;
+    map['createdAt'] = createdAt;
     return map;
   }
 
   ItemTransaction.fromMapObject(Map<String, dynamic> map) :
-    id = map['id'],
-    type = map['type'],
-    description = map['description'],
-    dueAmount = map['due_amount'],
-    itemId = map['item_id'],
-    date = map['date'],
-    amount = map['amount'],
-    costPrice = map['cost_price'],
-    items = map['items'],
-    createdAt = map['created_at'],
-    signature = map['signature'];
-
+        id = map['id'],
+        type = map['type'],
+        items = map['items'],
+        createdAt = map['createdAt'],
+        createdBy = map['createdBy'];
 }

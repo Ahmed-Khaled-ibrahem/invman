@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:invman/presentation/layout/home_screen.dart';
+import 'package:invman/presentation/layout/start_screen.dart';
 import 'package:invman/presentation/theme/theme.dart';
 
 
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Freelancer',
       theme: lightTheme,
-      home:  const HomeScreen(),
+      home:  const StartScreen(),
     );
   }
 }
