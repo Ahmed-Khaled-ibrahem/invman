@@ -1,0 +1,9 @@
+{
+    "appId": "invman-prujz",
+    "appUrl": "https://realm.mongodb.com/groups/64d38d5b50f61e032972946a/apps/64d3a1149b7fe37d9d1d2512",
+    "baseUrl": "https://realm.mongodb.com",
+    "clientApiBaseUrl": "https://ap-southeast-1.aws.realm.mongodb.com",
+    "dataApiBaseUrl": "https://ap-southeast-1.aws.data.mongodb-api.com",
+    "dataExplorerLink": "https://cloud.mongodb.com/links/64d38d5b50f61e032972946a/explorer/invmanDB/database/collection/find",
+    "dataSourceName": "mongodb-atlas"
+}
